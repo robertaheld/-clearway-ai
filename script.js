@@ -3,6 +3,12 @@ document.getElementById('idioma').addEventListener('change', () => {
   document.querySelectorAll('[data-pt]').forEach(el => {
     el.textContent = el.dataset[lang];
   });
+  document.querySelectorAll('span[data-pt]').forEach(span => {
+    span.textContent = span.dataset[lang];
+  });
+  document.querySelectorAll('option').forEach(opt => {
+    if (opt.dataset[lang]) opt.textContent = opt.dataset[lang];
+  });
 });
 
 async function gerarPlano() {
@@ -40,24 +46,18 @@ async function gerarPlano() {
   const observacoes = document.getElementById('observacoes').value;
 
   const respostaDiv = document.getElementById('resposta');
-  respostaDiv.innerText = idioma === 'en' ? 'Generating plan with AI...' :
-                          idioma === 'es' ? 'Generando plan con IA...' :
-                          'Gerando plano com IA...';
+  respostaDiv.innerText = idioma === 'en' ? 'Generating technician message...' :
+                          idioma === 'es' ? 'Generando mensaje técnico...' :
+                          'Gerando mensagem ao técnico...';
 
-  const promptBase = {
-    pt: modo === 'mista'
-      ? 'Você é um ortodontista especialista em dentição mista. Use o protocolo Roberta Held para gerar uma sequência técnica de tratamento com alinhadores para dentição mista.'
-      : 'Você é um ortodontista especialista em alinhadores. Use o protocolo Roberta Held para gerar um plano técnico de tratamento com alinhadores para um paciente adulto.',
-    en: modo === 'mista'
-      ? 'You are an orthodontist specialized in mixed dentition. Use the Roberta Held protocol to generate a technical aligner treatment sequence for mixed dentition.'
-      : 'You are an orthodontist specialized in aligners. Use the Roberta Held protocol to generate a technical treatment plan for an adult patient using aligners.',
-    es: modo === 'mista'
-      ? 'Eres un ortodoncista especializado en dentición mixta. Usa el protocolo de Roberta Held para generar una secuencia técnica de tratamiento con alineadores para dentición mixta.'
-      : 'Eres un ortodoncista especializado en alineadores. Usa el protocolo de Roberta Held para generar un plan técnico de tratamiento con alineadores para un paciente adulto.'
-  };
+  const promptSistema = idioma === 'pt'
+    ? 'Você é um ortodontista especialista em alinhadores ClearCorrect. Gere apenas a MENSAGEM AO TÉCNICO, seguindo o protocolo oficial da Dra. Roberta Held. A resposta deve estar no formato direto, objetivo e técnico. Não escreva plano para paciente, apenas a mensagem ao técnico no padrão Roberta Held.'
+    : idioma === 'en'
+    ? 'You are an orthodontist specialized in ClearCorrect aligners. Generate ONLY the TECHNICIAN MESSAGE using the official protocol of Dr. Roberta Held. The response must be technical, direct and formatted for internal use only. Do not write any patient text.'
+    : 'Eres un ortodoncista especializado en alineadores ClearCorrect. Genera SOLO el MENSAJE TÉCNICO siguiendo el protocolo oficial de la Dra. Roberta Held. La respuesta debe ser directa, técnica y sin texto para el paciente.';
 
   const pergunta = `
-Tipo facial: ${facial}.
+Paciente com tipo facial: ${facial}.
 Classe sagital: ${classe}.
 Dentes com: ${dentes.join(', ')}.
 Detalhes: ${detalhesDentes}.
@@ -72,7 +72,7 @@ Idioma: ${idioma}.
     const resposta = await fetch('/perguntar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ modo, pergunta, idioma, prompt: promptBase[idioma] })
+      body: JSON.stringify({ modo, pergunta, idioma, prompt: promptSistema })
     });
 
     const dados = await resposta.json();
