@@ -101,4 +101,4 @@ Finalizar com curva do sorriso.
     respostaDiv.innerText = 'Erro ao conectar com a IA.';
     console.error(err);
   }
-}
+
