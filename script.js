@@ -1,4 +1,12 @@
+document.getElementById('idioma').addEventListener('change', () => {
+  const lang = document.getElementById('idioma').value;
+  document.querySelectorAll('[data-pt]').forEach(el => {
+    el.textContent = el.dataset[lang];
+  });
+});
+
 async function gerarPlano() {
+  const idioma = document.getElementById('idioma').value;
   const modo = document.getElementById('modo').value;
   const facial = Array.from(document.getElementById('facial').selectedOptions).map(o => o.value).join(', ');
   const classe = Array.from(document.getElementById('classe').selectedOptions).map(o => o.value).join(', ');
@@ -31,74 +39,50 @@ async function gerarPlano() {
 
   const observacoes = document.getElementById('observacoes').value;
 
+  const respostaDiv = document.getElementById('resposta');
+  respostaDiv.innerText = idioma === 'en' ? 'Generating plan with AI...' :
+                          idioma === 'es' ? 'Generando plan con IA...' :
+                          'Gerando plano com IA...';
+
+  const promptBase = {
+    pt: modo === 'mista'
+      ? 'Você é um ortodontista especialista em dentição mista. Use o protocolo Roberta Held para gerar uma sequência técnica de tratamento com alinhadores para dentição mista.'
+      : 'Você é um ortodontista especialista em alinhadores. Use o protocolo Roberta Held para gerar um plano técnico de tratamento com alinhadores para um paciente adulto.',
+    en: modo === 'mista'
+      ? 'You are an orthodontist specialized in mixed dentition. Use the Roberta Held protocol to generate a technical aligner treatment sequence for mixed dentition.'
+      : 'You are an orthodontist specialized in aligners. Use the Roberta Held protocol to generate a technical treatment plan for an adult patient using aligners.',
+    es: modo === 'mista'
+      ? 'Eres un ortodoncista especializado en dentición mixta. Usa el protocolo de Roberta Held para generar una secuencia técnica de tratamiento con alineadores para dentición mixta.'
+      : 'Eres un ortodoncista especializado en alineadores. Usa el protocolo de Roberta Held para generar un plan técnico de tratamiento con alineadores para un paciente adulto.'
+  };
+
   const pergunta = `
-Paciente com tipo facial: ${facial}.
+Tipo facial: ${facial}.
 Classe sagital: ${classe}.
 Dentes com: ${dentes.join(', ')}.
 Detalhes: ${detalhesDentes}.
 Mordida aberta anterior: ${aberta}.
 Mordida cruzada: ${cruzada}.
 Sobremordida: ${sobremordida}.
-Observações adicionais: ${observacoes}.
+Observações: ${observacoes}.
+Idioma: ${idioma}.
   `;
-
-  const respostaDiv = document.getElementById('resposta');
-  respostaDiv.innerText = 'Gerando plano com IA...';
 
   try {
     const resposta = await fetch('/perguntar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ modo, pergunta })
+      body: JSON.stringify({ modo, pergunta, idioma, prompt: promptBase[idioma] })
     });
 
     const dados = await resposta.json();
     let respostaTexto = dados.resposta || 'Erro: resposta vazia.';
 
-    let mensagemTecnico = '';
-    if (modo === 'adulto' && classe.includes('classe III')) {
-      mensagemTecnico = `
-〚Mensagem ao Técnico – Classe III Cirúrgico〛
-Expandir maxila com rotação distal das cúspides vestibulares de 16 e 26.
-Distalização em bloco: 17-27 → 16-26 → 15-25, com 50% de sobreposição.
-Correção de giroversão após ganho de espaço com movimentos <2,0° por etapa.
-Contração leve de 38 e 48, se presentes.
-Attachs verticais em todos os posteriores.
-Recorte tipo fenda em 13 e 23.
-Recorte para botão no primeiro molar inferior.
-Intrusão posterior inferior para compensar sobremordida (sem bite ramp).
-Finalização com curva do sorriso e torque leve em 11 e 21.
-Evitar qualquer compensação sagital.
-Foco em alinhamento, expansão, torque e nivelamento.
-      `;
-    } else if (modo === 'mista') {
-      mensagemTecnico = `
-〚Mensagem ao Técnico – Dentição Mista〛
-Expandir ambos os arcos dentro do limite permitido pelo sistema.
-Descrever regiões com giroversão e apinhamento, sem IPR.
-Distalização máxima de 1mm em molares superiores.
-Sem attachs verticais, sem recortes, sem botão.
-Sem intrusão.
-Finalização respeitando erupção dos permanentes e oclusão funcional provisória.
-      `;
-    } else {
-      mensagemTecnico = `
-〚Mensagem ao Técnico – Adulto〛
-Expandir dentoalveolar com rotação distal das cúspides vestibulares de 16 e 26.
-Contração leve dos terceiros molares, se presentes.
-Distalização sequencial em bloco: 17-27 → 16-26 → 15-25 → 14-24 → 13-23.
-Correção de giroversão após ganho de espaço sem IPR, <2,0° por etapa.
-Attachs verticais nos posteriores.
-Recorte tipo fenda em 13 e 23.
-Recorte para botão no primeiro molar inferior.
-Intrusão de 11-21-12-22 com bite ramp anterior se >1mm.
-Finalizar com curva do sorriso.
-      `;
-    }
-
-    respostaDiv.innerText = respostaTexto + '\n\n' + mensagemTecnico;
+    respostaDiv.innerText = respostaTexto;
   } catch (err) {
-    respostaDiv.innerText = 'Erro ao conectar com a IA.';
+    respostaDiv.innerText = idioma === 'en' ? 'Error connecting to AI.' :
+                            idioma === 'es' ? 'Error al conectar con la IA.' :
+                            'Erro ao conectar com a IA.';
     console.error(err);
   }
 }
