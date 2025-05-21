@@ -1,218 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ClearWay – Orthodontic Planning</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      padding: 2rem;
-    }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 1rem;
-      display: block;
-    }
-    select, input, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .group {
-      margin-bottom: 1.5rem;
-    }
-    .condicional {
-      margin-left: 1rem;
-      margin-top: 0.5rem;
-    }
-    .image-preview {
-      max-width: 150px;
-      margin: 10px 10px 0 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    #resposta {
-      white-space: pre-wrap;
-      background-color: #eef;
-      padding: 1rem;
-      border-radius: 5px;
-      margin-top: 2rem;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1 data-pt="Planejamento Ortodôntico" data-en="Orthodontic Planning" data-es="Planificación Ortodóncica">Planejamento Ortodôntico</h1>
-
-    <div class="group">
-      <label for="idioma">Idioma / Language / Idioma:</label>
-      <select id="idioma">
-        <option value="pt">Português</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-      </select>
-    </div>
-
-    <div class="group">
-      <label data-pt="Modo de tratamento:" data-en="Treatment Mode:" data-es="Modo de tratamiento:">Modo de tratamento:</label>
-      <select id="modo">
-        <option value="adulto">Modo Roberta Held – Adulto</option>
-        <option value="mista">Modo Roberta Held – Dentição Mista</option>
-      </select>
-    </div>
-
-    <div class="group">
-      <label data-pt="Tipo Facial:" data-en="Facial Type:" data-es="Tipo Facial:">Tipo Facial:</label>
-      <select id="facial" multiple>
-        <option value="meso" data-pt="Meso" data-en="Meso" data-es="Meso">Meso</option>
-        <option value="braque" data-pt="Braque" data-en="Brachy" data-es="Braquicefálico">Braque</option>
-        <option value="dolico" data-pt="Dólico" data-en="Dolichocephalic" data-es="Dolicocéfalo">Dólico</option>
-      </select>
-    </div>
-
-    <div class="group">
-      <label data-pt="Classe Sagital:" data-en="Sagittal Classification:" data-es="Clase Sagital:">Classe Sagital:</label>
-      <select id="classe" multiple>
-        <option value="classe I" data-pt="Classe I" data-en="Class I" data-es="Clase I">Classe I</option>
-        <option value="classe II" data-pt="Classe II" data-en="Class II" data-es="Clase II">Classe II</option>
-        <option value="classe III" data-pt="Classe III" data-en="Class III" data-es="Clase III">Classe III</option>
-        <option value="classe II cirurgica" data-pt="Classe II Cirúrgica" data-en="Class II Surgical" data-es="Clase II Quirúrgica">Classe II Cirúrgica</option>
-        <option value="classe III cirurgica" data-pt="Classe III Cirúrgica" data-en="Class III Surgical" data-es="Clase III Quirúrgica">Classe III Cirúrgica</option>
-      </select>
-    </div>
-
-    <div class="group">
-      <label data-pt="Dentes com:" data-en="Teeth with:" data-es="Dientes con:">Dentes com:</label>
-      <div>
-        <label><input type="checkbox" id="diastema">
-          <span data-pt="Diastema" data-en="Diastema" data-es="Diastema">Diastema</span>
-        </label><br>
-        <label><input type="checkbox" id="giroversao">
-          <span data-pt="Giroversão" data-en="Rotation" data-es="Giroversión">Giroversão</span>
-        </label><br>
-        <label><input type="checkbox" id="apinhamento">
-          <span data-pt="Apinhamento" data-en="Crowding" data-es="Apiñamiento">Apinhamento</span>
-        </label>
-      </div>
-      <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
-    </div>
-    <div class="group">
-      <label>Mordida Aberta Anterior:</label>
-      <input type="checkbox" id="aberta">
-      <div class="condicional" id="abertaOpcoes" style="display:none;">
-        <input type="checkbox" value="extrusao anterior"> Extrusão anterior<br>
-        <input type="checkbox" value="intrusao posterior"> Intrusão posterior<br>
-        <input type="checkbox" value="ambos aberta"> Ambos
-      </div>
-    </div>
-
-    <div class="group">
-      <label>Mordida Cruzada:</label>
-      <input type="checkbox" id="cruzada">
-      <div class="condicional" id="cruzadaOpcoes" style="display:none;">
-        <input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado<br>
-        <input type="checkbox" value="contrair arco oposto"> Contrair arco oposto<br>
-        <input type="checkbox" value="ambos cruzada"> Ambos
-      </div>
-    </div>
-
-    <div class="group">
-      <label>Sobremordida:</label>
-      <input type="checkbox" id="sobremordida">
-      <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
-        <label>Correção:</label>
-        <input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior<br>
-        <input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior<br>
-        <input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)<br>
-        <label>Local:</label>
-        <input type="radio" name="local" value="superior"> Superior
-        <input type="radio" name="local" value="inferior"> Inferior
-        <input type="radio" name="local" value="ambos"> Ambos<br>
-        <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
-      </div>
-    </div>
-
-    <div class="group">
-      <label>Observações adicionais:</label>
-      <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
-    </div>
-
-    <div class="group">
-      <label>Upload de imagens do caso (até 3):</label>
-      <input type="file" id="imagem" accept="image/*" multiple>
-      <div id="preview-container"></div>
-    </div>
-
-    <button onclick="gerarPlano()">Gerar Planejamento</button>
-
-    <div id="resposta"></div>
+<div class="group">
+  <label data-pt="Mordida Aberta Anterior:" data-en="Anterior Open Bite:" data-es="Mordida Abierta Anterior:">Mordida Aberta Anterior:</label>
+  <input type="checkbox" id="aberta">
+  <div class="condicional" id="abertaOpcoes" style="display:none;">
+    <label>
+      <input type="checkbox" value="extrusao anterior">
+      <span data-pt="Extrusão anterior" data-en="Anterior extrusion" data-es="Extrusión anterior">Extrusão anterior</span>
+    </label><br>
+    <label>
+      <input type="checkbox" value="intrusao posterior">
+      <span data-pt="Intrusão posterior" data-en="Posterior intrusion" data-es="Intrusión posterior">Intrusão posterior</span>
+    </label><br>
+    <label>
+      <input type="checkbox" value="ambos aberta">
+      <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span>
+    </label>
   </div>
+</div>
 
-  <script>
-    document.getElementById('idioma').addEventListener('change', () => {
-      const lang = document.getElementById('idioma').value;
-      document.querySelectorAll('[data-pt]').forEach(el => {
-        el.textContent = el.dataset[lang];
-      });
-      document.querySelectorAll('option').forEach(opt => {
-        if (opt.dataset[lang]) opt.textContent = opt.dataset[lang];
-      });
-      document.querySelectorAll('span[data-pt]').forEach(span => {
-        span.textContent = span.dataset[lang];
-      });
-    });
+<div class="group">
+  <label data-pt="Mordida Cruzada:" data-en="Crossbite:" data-es="Mordida cruzada:">Mordida Cruzada:</label>
+  <input type="checkbox" id="cruzada">
+  <div class="condicional" id="cruzadaOpcoes" style="display:none;">
+    <label><input type="checkbox" value="expandir arco cruzado"><span data-pt="Expandir arco cruzado" data-en="Expand crossbite arch" data-es="Expandir arco cruzado">Expandir arco cruzado</span></label><br>
+    <label><input type="checkbox" value="contrair arco oposto"><span data-pt="Contrair arco oposto" data-en="Contract opposite arch" data-es="Contraer arco opuesto">Contrair arco oposto</span></label><br>
+    <label><input type="checkbox" value="ambos cruzada"><span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+  </div>
+</div>
 
-    document.getElementById('aberta').addEventListener('change', function () {
-      document.getElementById('abertaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById('cruzada').addEventListener('change', function () {
-      document.getElementById('cruzadaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById('sobremordida').addEventListener('change', function () {
-      document.getElementById('sobremordidaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
+<div class="group">
+  <label data-pt="Sobremordida:" data-en="Deep Bite:" data-es="Sobremordida:">Sobremordida:</label>
+  <input type="checkbox" id="sobremordida">
+  <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
+    <label data-pt="Correção:" data-en="Correction:" data-es="Corrección:">Correção:</label><br>
+    <input type="radio" name="sobrecorr" value="intruir anterior"> <span data-pt="Intruir anterior" data-en="Intrude anterior" data-es="Intruir anterior">Intruir anterior</span><br>
+    <input type="radio" name="sobrecorr" value="extruir posterior"> <span data-pt="Extruir posterior" data-en="Extrude posterior" data-es="Extruir posterior">Extruir posterior</span><br>
+    <input type="radio" name="sobrecorr" value="ambos"> <span data-pt="Ambos (detalhar abaixo)" data-en="Both (detail below)" data-es="Ambos (detallar abajo)">Ambos (detalhar abaixo)</span><br>
+    <label data-pt="Local:" data-en="Location:" data-es="Ubicación:">Local:</label><br>
+    <input type="radio" name="local" value="superior"> <span data-pt="Superior" data-en="Upper" data-es="Superior">Superior</span>
+    <input type="radio" name="local" value="inferior"> <span data-pt="Inferior" data-en="Lower" data-es="Inferior">Inferior</span>
+    <input type="radio" name="local" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span><br>
+    <textarea id="sobremordidaDetalhe" rows="2"
+      placeholder="Detalhe se marcou 'ambos'..."
+      data-pt="Detalhe se marcou 'ambos'..."
+      data-en="Detail if you marked 'both'..."
+      data-es="Detalle si marcó 'ambos'..."></textarea>
+  </div>
+</div>
 
-    document.getElementById('imagem').addEventListener('change', function (event) {
-      const container = document.getElementById('preview-container');
-      container.innerHTML = '';
-      Array.from(event.target.files).slice(0, 3).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.className = 'image-preview';
-          container.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-  </script>
+<div class="group">
+  <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
+  <textarea id="observacoes" rows="4"
+    placeholder="Escreva aqui informações adicionais relevantes..."
+    data-pt="Escreva aqui informações adicionais relevantes..."
+    data-en="Write any relevant additional information here..."
+    data-es="Escriba información adicional relevante aquí..."></textarea>
+</div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<div class="group">
+  <label data-pt="Upload de imagens do caso (até 3):" data-en="Upload case images (up to 3):" data-es="Suba imágenes del caso (hasta 3):">
+    Upload de imagens do caso (até 3):
+  </label>
+  <input type="file" id="imagem" accept="image/*" multiple>
+  <div id="preview-container"></div>
+</div>
