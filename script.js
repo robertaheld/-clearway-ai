@@ -53,18 +53,18 @@ async function gerarPlano() {
   const promptSistema = idioma === 'pt'
     ? 'Você é um ortodontista especialista em alinhadores ClearCorrect. Gere apenas a MENSAGEM AO TÉCNICO, seguindo o protocolo oficial da Dra. Roberta Held. A resposta deve estar no formato direto, objetivo e técnico. Não escreva plano para paciente, apenas a mensagem ao técnico no padrão Roberta Held.'
     : idioma === 'en'
-    ? 'You are an orthodontist specialized in ClearCorrect aligners. Generate ONLY the TECHNICIAN MESSAGE using the official protocol of Dr. Roberta Held. The response must be technical, direct and formatted for internal use only. Do not write any patient text.'
+    ? 'You are an orthodontist specialized in ClearCorrect aligners. Generate ONLY the TECHNICIAN MESSAGE using the official protocol of Dr. Roberta Held. The response must be technical, direct and formatted for technician only. Do not write any patient plan.'
     : 'Eres un ortodoncista especializado en alineadores ClearCorrect. Genera SOLO el MENSAJE TÉCNICO siguiendo el protocolo oficial de la Dra. Roberta Held. La respuesta debe ser directa, técnica y sin texto para el paciente.';
 
   const pergunta = `
-Paciente com tipo facial: ${facial}.
+Tipo facial: ${facial}.
 Classe sagital: ${classe}.
 Dentes com: ${dentes.join(', ')}.
 Detalhes: ${detalhesDentes}.
 Mordida aberta anterior: ${aberta}.
 Mordida cruzada: ${cruzada}.
 Sobremordida: ${sobremordida}.
-Observações: ${observacoes}.
+Observações adicionais: ${observacoes}.
 Idioma: ${idioma}.
   `;
 
