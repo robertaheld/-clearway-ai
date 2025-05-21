@@ -89,20 +89,20 @@
     <div class="group">
       <label data-pt="Tipo Facial:" data-en="Facial Type:" data-es="Tipo Facial:">Tipo Facial:</label>
       <select id="facial" multiple>
-        <option value="meso">Meso</option>
-        <option value="braque">Braque</option>
-        <option value="dolico">Dólico</option>
+        <option value="meso" data-pt="Meso" data-en="Meso" data-es="Meso">Meso</option>
+        <option value="braque" data-pt="Braque" data-en="Brachy" data-es="Braquicefálico">Braque</option>
+        <option value="dolico" data-pt="Dólico" data-en="Dolichocephalic" data-es="Dolicocéfalo">Dólico</option>
       </select>
     </div>
 
     <div class="group">
       <label data-pt="Classe Sagital:" data-en="Sagittal Classification:" data-es="Clase Sagital:">Classe Sagital:</label>
       <select id="classe" multiple>
-        <option value="classe I">Classe I</option>
-        <option value="classe II">Classe II</option>
-        <option value="classe III">Classe III</option>
-        <option value="classe II cirurgica">Classe II Cirúrgica</option>
-        <option value="classe III cirurgica">Classe III Cirúrgica</option>
+        <option value="classe I" data-pt="Classe I" data-en="Class I" data-es="Clase I">Classe I</option>
+        <option value="classe II" data-pt="Classe II" data-en="Class II" data-es="Clase II">Classe II</option>
+        <option value="classe III" data-pt="Classe III" data-en="Class III" data-es="Clase III">Classe III</option>
+        <option value="classe II cirurgica" data-pt="Classe II Cirúrgica" data-en="Class II Surgical" data-es="Clase II Quirúrgica">Classe II Cirúrgica</option>
+        <option value="classe III cirurgica" data-pt="Classe III Cirúrgica" data-en="Class III Surgical" data-es="Clase III Quirúrgica">Classe III Cirúrgica</option>
       </select>
     </div>
 
@@ -115,7 +115,7 @@
     </div>
 
     <div class="group">
-      <label>Mordida Aberta Anterior:</label>
+      <label data-pt="Mordida Aberta Anterior:" data-en="Anterior Open Bite:" data-es="Mordida Abierta Anterior:">Mordida Aberta Anterior:</label>
       <input type="checkbox" id="aberta">
       <div class="condicional" id="abertaOpcoes" style="display:none;">
         <input type="checkbox" value="extrusao anterior"> Extrusão anterior<br>
@@ -125,7 +125,7 @@
     </div>
 
     <div class="group">
-      <label>Mordida Cruzada:</label>
+      <label data-pt="Mordida Cruzada:" data-en="Crossbite:" data-es="Mordida Cruzada:">Mordida Cruzada:</label>
       <input type="checkbox" id="cruzada">
       <div class="condicional" id="cruzadaOpcoes" style="display:none;">
         <input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado<br>
@@ -133,9 +133,8 @@
         <input type="checkbox" value="ambos cruzada"> Ambos
       </div>
     </div>
-
     <div class="group">
-      <label>Sobremordida:</label>
+      <label data-pt="Sobremordida:" data-en="Deep Bite:" data-es="Sobremordida:">Sobremordida:</label>
       <input type="checkbox" id="sobremordida">
       <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
         <label>Correção:</label>
@@ -151,12 +150,14 @@
     </div>
 
     <div class="group">
-      <label>Observações adicionais:</label>
+      <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
       <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
     </div>
 
     <div class="group">
-      <label>Upload de imagens do caso (até 3):</label>
+      <label data-pt="Upload de imagens do caso (até 3):" data-en="Upload case images (up to 3):" data-es="Subir imágenes del caso (hasta 3):">
+        Upload de imagens do caso (até 3):
+      </label>
       <input type="file" id="imagem" accept="image/*" multiple>
       <div id="preview-container"></div>
     </div>
@@ -165,6 +166,49 @@
 
     <div id="resposta"></div>
   </div>
+
+  <script>
+    document.getElementById('idioma').addEventListener('change', () => {
+      const lang = document.getElementById('idioma').value;
+      document.querySelectorAll('[data-pt]').forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+      document.querySelectorAll('option').forEach(opt => {
+        if (opt.dataset[lang]) opt.textContent = opt.dataset[lang];
+      });
+      document.querySelectorAll('textarea').forEach(area => {
+        if (area.placeholder && area.dataset) {
+          const val = area.getAttribute(`data-${lang}`);
+          if (val) area.placeholder = val;
+        }
+      });
+    });
+
+    document.getElementById('aberta').addEventListener('change', function () {
+      document.getElementById('abertaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('cruzada').addEventListener('change', function () {
+      document.getElementById('cruzadaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('sobremordida').addEventListener('change', function () {
+      document.getElementById('sobremordidaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('imagem').addEventListener('change', function (event) {
+      const container = document.getElementById('preview-container');
+      container.innerHTML = '';
+      Array.from(event.target.files).slice(0, 3).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'image-preview';
+          container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
