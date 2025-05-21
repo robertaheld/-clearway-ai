@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planejamento Ortodôntico ClearWay</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 2rem; }
+    .container { max-width: 700px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+    h1 { text-align: center; }
+    label { font-weight: bold; margin-top: 1rem; display: block; }
+    select, input, textarea, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+    .group { margin-bottom: 1.5rem; }
+    .condicional { margin-left: 1rem; margin-top: 0.5rem; }
+    .image-preview { margin-top: 1rem; max-width: 100%; height: auto; border-radius: 5px; }
+    #resposta { white-space: pre-wrap; background-color: #eef; padding: 1rem; border-radius: 5px; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Planejamento Ortodôntico</h1>
+
+    <div class="group">
+      <label for="modo">Modo de tratamento:</label>
+      <select id="modo">
+        <option value="adulto">Modo Roberta Held – Adulto</option>
+        <option value="mista">Modo Roberta Held – Dentição Mista</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label>Tipo Facial:</label>
+      <select id="facial" multiple>
+        <option value="meso">Meso</option>
+        <option value="braque">Braque</option>
+        <option value="dolico">Dólico</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label>Classe Sagital:</label>
+      <select id="classe" multiple>
+        <option value="classe I">Classe I</option>
+        <option value="classe II">Classe II</option>
+        <option value="classe III">Classe III</option>
+        <option value="classe II cirurgica">Classe II Cirúrgica</option>
+        <option value="classe III cirurgica">Classe III Cirúrgica</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label>Dentes com:</label>
+      <input type="checkbox" id="diastema"> Diastema<br>
+      <input type="checkbox" id="giroversao"> Giroversão<br>
+      <input type="checkbox" id="apinhamento"> Apinhamento<br>
+      <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
+    </div>
+
+    <div class="group">
+      <label>Mordida Aberta Anterior:</label>
+      <input type="checkbox" id="aberta">
+      <div class="condicional" id="abertaOpcoes" style="display:none;">
+        <input type="checkbox" value="extrusao anterior"> Extrusão anterior<br>
+        <input type="checkbox" value="intrusao posterior"> Intrusão posterior<br>
+        <input type="checkbox" value="ambos aberta"> Ambos
+      </div>
+    </div>
+
+    <div class="group">
+      <label>Mordida Cruzada:</label>
+      <input type="checkbox" id="cruzada">
+      <div class="condicional" id="cruzadaOpcoes" style="display:none;">
+        <input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado<br>
+        <input type="checkbox" value="contrair arco oposto"> Contrair arco oposto<br>
+        <input type="checkbox" value="ambos cruzada"> Ambos
+      </div>
+    </div>
+
+    <div class="group">
+      <label>Sobremordida:</label>
+      <input type="checkbox" id="sobremordida">
+      <div class="condicional" id="sobremordidaOpcoes" style="display:none
