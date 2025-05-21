@@ -108,14 +108,21 @@
 
     <div class="group">
       <label data-pt="Dentes com:" data-en="Teeth with:" data-es="Dientes con:">Dentes com:</label>
-      <input type="checkbox" id="diastema"> Diastema<br>
-      <input type="checkbox" id="giroversao"> Giroversão<br>
-      <input type="checkbox" id="apinhamento"> Apinhamento<br>
+      <div>
+        <label><input type="checkbox" id="diastema">
+          <span data-pt="Diastema" data-en="Diastema" data-es="Diastema">Diastema</span>
+        </label><br>
+        <label><input type="checkbox" id="giroversao">
+          <span data-pt="Giroversão" data-en="Rotation" data-es="Giroversión">Giroversão</span>
+        </label><br>
+        <label><input type="checkbox" id="apinhamento">
+          <span data-pt="Apinhamento" data-en="Crowding" data-es="Apiñamiento">Apinhamento</span>
+        </label>
+      </div>
       <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
     </div>
-
     <div class="group">
-      <label data-pt="Mordida Aberta Anterior:" data-en="Anterior Open Bite:" data-es="Mordida Abierta Anterior:">Mordida Aberta Anterior:</label>
+      <label>Mordida Aberta Anterior:</label>
       <input type="checkbox" id="aberta">
       <div class="condicional" id="abertaOpcoes" style="display:none;">
         <input type="checkbox" value="extrusao anterior"> Extrusão anterior<br>
@@ -125,7 +132,7 @@
     </div>
 
     <div class="group">
-      <label data-pt="Mordida Cruzada:" data-en="Crossbite:" data-es="Mordida Cruzada:">Mordida Cruzada:</label>
+      <label>Mordida Cruzada:</label>
       <input type="checkbox" id="cruzada">
       <div class="condicional" id="cruzadaOpcoes" style="display:none;">
         <input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado<br>
@@ -133,8 +140,9 @@
         <input type="checkbox" value="ambos cruzada"> Ambos
       </div>
     </div>
+
     <div class="group">
-      <label data-pt="Sobremordida:" data-en="Deep Bite:" data-es="Sobremordida:">Sobremordida:</label>
+      <label>Sobremordida:</label>
       <input type="checkbox" id="sobremordida">
       <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
         <label>Correção:</label>
@@ -150,14 +158,12 @@
     </div>
 
     <div class="group">
-      <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
+      <label>Observações adicionais:</label>
       <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
     </div>
 
     <div class="group">
-      <label data-pt="Upload de imagens do caso (até 3):" data-en="Upload case images (up to 3):" data-es="Subir imágenes del caso (hasta 3):">
-        Upload de imagens do caso (até 3):
-      </label>
+      <label>Upload de imagens do caso (até 3):</label>
       <input type="file" id="imagem" accept="image/*" multiple>
       <div id="preview-container"></div>
     </div>
@@ -176,11 +182,8 @@
       document.querySelectorAll('option').forEach(opt => {
         if (opt.dataset[lang]) opt.textContent = opt.dataset[lang];
       });
-      document.querySelectorAll('textarea').forEach(area => {
-        if (area.placeholder && area.dataset) {
-          const val = area.getAttribute(`data-${lang}`);
-          if (val) area.placeholder = val;
-        }
+      document.querySelectorAll('span[data-pt]').forEach(span => {
+        span.textContent = span.dataset[lang];
       });
     });
 
