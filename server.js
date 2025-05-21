@@ -8,8 +8,6 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
-// Serve o index.html na raiz
 app.use(express.static(path.join(__dirname)));
 
 app.get('/', (req, res) => {
@@ -21,11 +19,13 @@ const openai = new OpenAI({
 });
 
 app.post('/perguntar', async (req, res) => {
-  const { modo, pergunta } = req.body;
+  const { modo, pergunta, idioma } = req.body;
 
-  const promptSistema = modo === 'mista'
-    ? 'Você é um ortodontista especialista em dentição mista. Use o protocolo Roberta Held para gerar uma sequência técnica de tratamento com alinhadores para dentição mista.'
-    : 'Você é um ortodontista especialista em alinhadores. Use o protocolo Roberta Held para gerar um plano técnico de tratamento com alinhadores para um paciente adulto.';
+  const promptSistema = idioma === 'pt'
+    ? 'Você é um ortodontista especialista em alinhadores ClearCorrect. Gere apenas a MENSAGEM AO TÉCNICO, seguindo o protocolo oficial da Dra. Roberta Held. A resposta deve estar no formato direto, objetivo e técnico. Não escreva plano para paciente, apenas a mensagem ao técnico no padrão Roberta Held.'
+    : idioma === 'en'
+    ? 'You are an orthodontist specialized in ClearCorrect aligners. Generate ONLY the TECHNICIAN MESSAGE using the official protocol of Dr. Roberta Held. The response must be technical, direct and formatted for technician only. Do not write any patient plan.'
+    : 'Eres un ortodoncista especializado en alineadores ClearCorrect. Genera SOLO el MENSAJE TÉCNICO siguiendo el protocolo oficial de la Dra. Roberta Held. La respuesta debe ser directa, técnica y sin texto para el paciente.';
 
   try {
     const resposta = await openai.chat.completions.create({
@@ -34,7 +34,7 @@ app.post('/perguntar', async (req, res) => {
         { role: 'system', content: promptSistema },
         { role: 'user', content: pergunta }
       ],
-      temperature: 0.5,
+      temperature: 0.4,
       max_tokens: 800
     });
 
