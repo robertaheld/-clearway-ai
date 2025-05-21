@@ -46,7 +46,7 @@ Observações adicionais: ${observacoes}.
   respostaDiv.innerText = 'Gerando plano com IA...';
 
   try {
-    const resposta = await fetch('http://localhost:3000/perguntar', {
+    const resposta = await fetch('/perguntar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ modo, pergunta })
@@ -101,4 +101,4 @@ Finalizar com curva do sorriso.
     respostaDiv.innerText = 'Erro ao conectar com a IA.';
     console.error(err);
   }
-
+}
