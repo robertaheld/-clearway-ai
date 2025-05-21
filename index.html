@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Planejamento Ortodôntico ClearWay</title>
+  <title>ClearWay – Orthodontic Planning</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -67,10 +67,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>Planejamento Ortodôntico</h1>
+    <h1 data-pt="Planejamento Ortodôntico" data-en="Orthodontic Planning" data-es="Planificación Ortodóncica">Planejamento Ortodôntico</h1>
 
     <div class="group">
-      <label for="modo">Modo de tratamento:</label>
+      <label for="idioma">Idioma / Language / Idioma:</label>
+      <select id="idioma">
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label data-pt="Modo de tratamento:" data-en="Treatment Mode:" data-es="Modo de tratamiento:">Modo de tratamento:</label>
       <select id="modo">
         <option value="adulto">Modo Roberta Held – Adulto</option>
         <option value="mista">Modo Roberta Held – Dentição Mista</option>
@@ -78,7 +87,7 @@
     </div>
 
     <div class="group">
-      <label>Tipo Facial:</label>
+      <label data-pt="Tipo Facial:" data-en="Facial Type:" data-es="Tipo Facial:">Tipo Facial:</label>
       <select id="facial" multiple>
         <option value="meso">Meso</option>
         <option value="braque">Braque</option>
@@ -87,7 +96,7 @@
     </div>
 
     <div class="group">
-      <label>Classe Sagital:</label>
+      <label data-pt="Classe Sagital:" data-en="Sagittal Classification:" data-es="Clase Sagital:">Classe Sagital:</label>
       <select id="classe" multiple>
         <option value="classe I">Classe I</option>
         <option value="classe II">Classe II</option>
@@ -98,7 +107,7 @@
     </div>
 
     <div class="group">
-      <label>Dentes com:</label>
+      <label data-pt="Dentes com:" data-en="Teeth with:" data-es="Dientes con:">Dentes com:</label>
       <input type="checkbox" id="diastema"> Diastema<br>
       <input type="checkbox" id="giroversao"> Giroversão<br>
       <input type="checkbox" id="apinhamento"> Apinhamento<br>
@@ -156,33 +165,6 @@
 
     <div id="resposta"></div>
   </div>
-
-  <script>
-    document.getElementById('aberta').addEventListener('change', function () {
-      document.getElementById('abertaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById('cruzada').addEventListener('change', function () {
-      document.getElementById('cruzadaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById('sobremordida').addEventListener('change', function () {
-      document.getElementById('sobremordidaOpcoes').style.display = this.checked ? 'block' : 'none';
-    });
-
-    document.getElementById('imagem').addEventListener('change', function (event) {
-      const container = document.getElementById('preview-container');
-      container.innerHTML = '';
-      Array.from(event.target.files).slice(0, 3).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.className = 'image-preview';
-          container.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-  </script>
 
   <script src="script.js"></script>
 </body>
