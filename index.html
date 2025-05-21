@@ -1,19 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Planejamento Ortodôntico ClearWay</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 2rem; }
-    .container { max-width: 700px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-    h1 { text-align: center; }
-    label { font-weight: bold; margin-top: 1rem; display: block; }
-    select, input, textarea, button { width: 100%; padding: 0.75rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
-    .group { margin-bottom: 1.5rem; }
-    .condicional { margin-left: 1rem; margin-top: 0.5rem; }
-    .image-preview { margin-top: 1rem; max-width: 100%; height: auto; border-radius: 5px; }
-    #resposta { white-space: pre-wrap; background-color: #eef; padding: 1rem; border-radius: 5px; margin-top: 2rem; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .group {
+      margin-bottom: 1.5rem;
+    }
+    .condicional {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+    }
+    .image-preview {
+      max-width: 150px;
+      margin: 10px 10px 0 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #resposta {
+      white-space: pre-wrap;
+      background-color: #eef;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-top: 2rem;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -79,6 +128,62 @@
     <div class="group">
       <label>Sobremordida:</label>
       <input type="checkbox" id="sobremordida">
-      <div class="condicional" id="sobremordidaOpcoes" style="display:none
-        <button onclick="gerarPlano()">Gerar Planejamento</button>
+      <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
+        <label>Correção:</label>
+        <input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior<br>
+        <input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior<br>
+        <input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)<br>
+        <label>Local:</label>
+        <input type="radio" name="local" value="superior"> Superior
+        <input type="radio" name="local" value="inferior"> Inferior
+        <input type="radio" name="local" value="ambos"> Ambos<br>
+        <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
+      </div>
+    </div>
 
+    <div class="group">
+      <label>Observações adicionais:</label>
+      <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
+    </div>
+
+    <div class="group">
+      <label>Upload de imagens do caso (até 3):</label>
+      <input type="file" id="imagem" accept="image/*" multiple>
+      <div id="preview-container"></div>
+    </div>
+
+    <button onclick="gerarPlano()">Gerar Planejamento</button>
+
+    <div id="resposta"></div>
+  </div>
+
+  <script>
+    document.getElementById('aberta').addEventListener('change', function () {
+      document.getElementById('abertaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('cruzada').addEventListener('change', function () {
+      document.getElementById('cruzadaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('sobremordida').addEventListener('change', function () {
+      document.getElementById('sobremordidaOpcoes').style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('imagem').addEventListener('change', function (event) {
+      const container = document.getElementById('preview-container');
+      container.innerHTML = '';
+      Array.from(event.target.files).slice(0, 3).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'image-preview';
+          container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
