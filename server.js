@@ -1,22 +1,22 @@
-// server.js
-
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require("path");
 const { OpenAI } = require("openai");
 
-// Substitua por sua chave real
 const openai = new OpenAI({ apiKey: "SUA_CHAVE_DA_OPENAI" });
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Linha nova para servir index.html e afins
+app.use(express.static(path.join(__dirname)));
+
 const PORT = process.env.PORT || 3000;
 
 app.post("/perguntar", async (req, res) => {
   const { modo, pergunta, idioma } = req.body;
-
   const systemPrompt = gerarPromptSistema(modo, idioma);
   const userPrompt = pergunta;
 
