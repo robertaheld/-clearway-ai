@@ -1,47 +1,38 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const path = require("path");
-const { OpenAI } = require("openai");
-
-const openai = new OpenAI({ apiKey: "SUA_CHAVE_DA_OPENAI" });
+// server.js
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import { OpenAI } from 'openai';
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 app.use(cors());
 app.use(bodyParser.json());
 
-// Linha nova para servir index.html e afins
-app.use(express.static(path.join(__dirname)));
-
-const PORT = process.env.PORT || 3000;
-
-app.post("/perguntar", async (req, res) => {
-  const { modo, pergunta, idioma } = req.body;
-  const systemPrompt = gerarPromptSistema(modo, idioma);
-  const userPrompt = pergunta;
+app.post('/perguntar', async (req, res) => {
+  const { pergunta, prompt, modo, idioma } = req.body;
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: 'gpt-4',
       messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
+        { role: 'system', content: prompt },
+        { role: 'user', content: pergunta }
       ],
+      temperature: 0.7
     });
-    res.json({ resposta: completion.choices[0].message.content });
-  } catch (error) {
-    console.error("Erro da OpenAI:", error);
-    res.json({ resposta: "Erro ao gerar resposta da IA." });
+
+    const resposta = completion.choices[0]?.message?.content || 'Resposta vazia';
+    res.json({ resposta });
+  } catch (err) {
+    console.error('Erro da OpenAI:', err);
+    res.status(500).json({ erro: err.message || 'Erro interno' });
   }
 });
 
-function gerarPromptSistema(modo, idioma) {
-  const prefixo = {
-    pt: "Você é um ortodontista técnico especializado em planejamento de casos com alinhadores transparentes. Responda apenas com a mensagem ao técnico, dentro do protocolo do modo Roberta Held ativado.",
-    en: "You are a technical orthodontist specialized in planning aligner treatments. Respond only with the technician message following the Roberta Held protocol.",
-    es: "Eres un ortodoncista técnico especializado en planificación con alineadores. Responde únicamente con el mensaje al técnico siguiendo el protocolo de Roberta Held."
-  };
-  return prefixo[idioma] || prefixo.pt;
-}
-
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
