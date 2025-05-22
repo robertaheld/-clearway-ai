@@ -71,7 +71,7 @@ async function gerarPlano() {
   const pergunta = `\nTipo facial: ${facial}.\nClasse sagital: ${classe}.\nDentes com: ${dentes.join(', ')}.\nDetalhes: ${detalhesDentes}.\nMordida aberta anterior: ${aberta}.\nMordida cruzada: ${cruzada}.\nSobremordida: ${sobremordida}.\nObservações adicionais: ${observacoes}.\nIdioma: ${idioma}.`;
 
   try {
-    const resposta = await fetch('/perguntar', {
+    const resposta = await fetch('https://clearway-ai.onrender.com/perguntar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ modo, pergunta, idioma, prompt: promptSistema })
