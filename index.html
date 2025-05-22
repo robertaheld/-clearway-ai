@@ -3,77 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planejamento Ortodôntico</title>
-  <link rel="stylesheet" href="style.css">
+  <title>ClearWay – Orthodontic Planning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .group {
+      margin-bottom: 1.5rem;
+    }
+    .condicional {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+    }
+    .image-preview {
+      max-width: 150px;
+      margin: 10px 10px 0 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #resposta {
+      white-space: pre-wrap;
+      background-color: #eef;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-top: 2rem;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
+    <h1>Planejamento Ortodôntico</h1>
+
+    <div class="group">
+      <label for="idioma">Idioma / Language / Idioma:</label>
       <select id="idioma">
         <option value="pt">Português</option>
         <option value="en">English</option>
         <option value="es">Español</option>
       </select>
-      <h1 id="titulo">Planejamento Ortodôntico</h1>
     </div>
 
-    <form id="formulario">
-      <label id="labelTipo">Tipo Facial:</label>
-      <select name="tipo" id="tipo">
+    <div class="group">
+      <label>Modo de tratamento:</label>
+      <select id="modo">
+        <option value="adulto">Modo Roberta Held – Adulto</option>
+        <option value="mista">Modo Roberta Held – Dentição Mista</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label>Tipo Facial:</label>
+      <select id="facial" multiple>
         <option value="meso">Meso</option>
         <option value="braque">Braque</option>
-        <option value="dolico">Dolico</option>
+        <option value="dolico">Dólico</option>
       </select>
+    </div>
 
-      <label id="labelClasse">Classe Sagital:</label>
-      <select name="classe" id="classe">
-        <option value="Classe I">Classe I</option>
-        <option value="Classe II">Classe II</option>
-        <option value="Classe III">Classe III</option>
-        <option value="Classe II Cirúrgica">Classe II Cirúrgica</option>
-        <option value="Classe III Cirúrgica">Classe III Cirúrgica</option>
+    <div class="group">
+      <label>Classe Sagital:</label>
+      <select id="classe" multiple>
+        <option value="classe I">Classe I</option>
+        <option value="classe II">Classe II</option>
+        <option value="classe III">Classe III</option>
+        <option value="classe II cirurgica">Classe II Cirúrgica</option>
+        <option value="classe III cirurgica">Classe III Cirúrgica</option>
       </select>
+    </div>
 
-      <label id="labelDentes">Dentes com:</label>
-      <div>
-        <input type="checkbox" name="dentes" value="diastema" id="diastema">
-        <label for="diastema" id="labelDiastema">Diastema</label>
-        <input type="checkbox" name="dentes" value="giroversao" id="giroversao">
-        <label for="giroversao" id="labelGiroversao">Giroversão</label>
-        <input type="checkbox" name="dentes" value="apinhamento" id="apinhamento">
-        <label for="apinhamento" id="labelApinhamento">Apinhamento</label>
+    <div class="group">
+      <label>Dentes com:</label>
+      <label><input type="checkbox" id="diastema"> Diastema</label><br>
+      <label><input type="checkbox" id="giroversao"> Giroversão</label><br>
+      <label><input type="checkbox" id="apinhamento"> Apinhamento</label>
+      <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
+    </div>
+
+    <div class="group">
+      <label>Mordida Aberta Anterior:</label>
+      <input type="checkbox" id="aberta">
+      <div class="condicional" id="abertaOpcoes" style="display:none;">
+        <label><input type="checkbox" value="extrusao anterior"> Extrusão anterior</label><br>
+        <label><input type="checkbox" value="intrusao posterior"> Intrusão posterior</label><br>
+        <label><input type="checkbox" value="ambos aberta"> Ambos</label>
       </div>
-      <textarea id="detalhesDentes" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
+    </div>
 
-      <label id="labelMordidaAberta">Mordida Aberta Anterior:</label>
-      <div>
-        <input type="checkbox" name="maa" value="extrusao_anterior" id="extrusao_anterior">
-        <label for="extrusao_anterior" id="labelExtrusao">Extrusão anterior</label>
-        <input type="checkbox" name="maa" value="intrusao_posterior" id="intrusao_posterior">
-        <label for="intrusao_posterior" id="labelIntrusao">Intrusão posterior</label>
-        <input type="checkbox" name="maa" value="ambos" id="ambos_maa">
-        <label for="ambos_maa" id="labelAmbosMaa">Ambos</label>
+    <div class="group">
+      <label>Mordida Cruzada:</label>
+      <input type="checkbox" id="cruzada">
+      <div class="condicional" id="cruzadaOpcoes" style="display:none;">
+        <label><input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado</label><br>
+        <label><input type="checkbox" value="contrair arco oposto"> Contrair arco oposto</label><br>
+        <label><input type="checkbox" value="ambos cruzada"> Ambos</label>
       </div>
+    </div>
 
-      <label id="labelMordidaCruzada">Mordida Cruzada:</label>
-      <input type="checkbox" id="mordida_cruzada" name="mordida_cruzada">
+    <div class="group">
+      <label>Sobremordida:</label>
+      <input type="checkbox" id="sobremordida">
+      <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
+        <label>Correção:</label><br>
+        <input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior<br>
+        <input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior<br>
+        <input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)<br>
+        <label>Local:</label><br>
+        <input type="radio" name="local" value="superior"> Superior
+        <input type="radio" name="local" value="inferior"> Inferior
+        <input type="radio" name="local" value="ambos"> Ambos
+        <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
+      </div>
+    </div>
 
-      <label id="labelSobremordida">Sobremordida:</label>
-      <input type="checkbox" id="sobremordida" name="sobremordida">
+    <div class="group">
+      <label>Observações adicionais:</label>
+      <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
+    </div>
 
-      <label id="labelObs">Observações adicionais:</label>
-      <textarea id="observacoes" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
+    <div class="group">
+      <label>Upload de imagens do caso (até 3):</label>
+      <input type="file" id="imagem" accept="image/*" multiple>
+      <div id="preview-container"></div>
+    </div>
 
-      <label id="labelUpload">Upload de imagens do caso (até 5):</label>
-      <input type="file" id="fotos" name="fotos" accept="image/*" multiple>
-      <div id="preview"></div>
-
-      <button type="submit" id="btnGerar">Gerar Planejamento</button>
-    </form>
-
+    <button onclick="gerarPlano()">Gerar Planejamento</button>
     <div id="resposta"></div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
