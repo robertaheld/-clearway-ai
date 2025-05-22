@@ -67,72 +67,74 @@
 <body>
   <div class="container">
     <h1 data-pt="Planejamento Ortodôntico" data-en="Orthodontic Planning" data-es="Planificación Ortodóncica">Planejamento Ortodôntico</h1>
-    <form id="formulario">
-  <!-- Idioma -->
+    <div id="formulario">
   <div class="group">
-    <label for="idioma">Idioma / Language / Idioma:</label>
+    <label for="idioma" data-pt="Idioma" data-en="Language" data-es="Idioma">Idioma:</label>
     <select id="idioma">
       <option value="pt">Português</option>
       <option value="en">English</option>
       <option value="es">Español</option>
     </select>
-  </div>  <!-- Modo -->  <div class="group">
-    <label for="modo">Modo:</label>
+  </div>  <div class="group">
+    <label for="modo" data-pt="Modo de tratamento" data-en="Treatment mode" data-es="Modo de tratamiento">Modo de tratamento:</label>
     <select id="modo">
       <option value="adulto">Modo Roberta Held – Adulto</option>
       <option value="mista">Modo Roberta Held – Dentição Mista</option>
     </select>
-  </div>  <!-- Tipo Facial -->  <div class="group">
-    <label for="facial">Tipo Facial:</label>
+  </div>  <div class="group">
+    <label for="facial" data-pt="Tipo facial" data-en="Facial type" data-es="Tipo facial">Tipo facial:</label>
     <select id="facial">
       <option value="meso">Meso</option>
       <option value="braque">Braque</option>
       <option value="dolico">Dolico</option>
     </select>
-  </div>  <!-- Classe Sagital -->  <div class="group">
-    <label for="classe">Classe Sagital:</label>
+  </div>  <div class="group">
+    <label for="classe" data-pt="Classe sagital" data-en="Sagittal class" data-es="Clase sagital">Classe sagital:</label>
     <select id="classe">
       <option value="classe I">Classe I</option>
       <option value="classe II">Classe II</option>
       <option value="classe III">Classe III</option>
-      <option value="classe II cirurgica">Classe II Cirúrgica</option>
-      <option value="classe III cirurgica">Classe III Cirúrgica</option>
+      <option value="classe II cirurgica">Classe II cirúrgica</option>
+      <option value="classe III cirurgica">Classe III cirúrgica</option>
     </select>
-  </div>  <!-- Dentes com -->  <div class="group">
-    <label>Dentes com:</label>
-    <label><input type="checkbox" id="diastema"> Diastema</label><br>
-    <label><input type="checkbox" id="giroversao"> Giroversão</label><br>
-    <label><input type="checkbox" id="apinhamento"> Apinhamento</label>
-    <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
-  </div>  <!-- Mordida Aberta Anterior -->  <div class="group">
-    <label>Mordida Aberta Anterior:</label>
-    <label><input type="checkbox" value="extrusao anterior"> Extrusão anterior</label><br>
-    <label><input type="checkbox" value="intrusao posterior"> Intrusão posterior</label><br>
-    <label><input type="checkbox" value="ambos aberta"> Ambos</label>
-  </div>  <!-- Mordida Cruzada -->  <div class="group">
-    <label>Mordida Cruzada:</label>
-    <label><input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado</label><br>
-    <label><input type="checkbox" value="contrair arco oposto"> Contrair arco oposto</label><br>
-    <label><input type="checkbox" value="ambos cruzada"> Ambos</label>
-  </div>  <!-- Sobremordida -->  <div class="group">
-    <label>Sobremordida:</label>
-    <label><input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior</label><br>
-    <label><input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior</label><br>
-    <label><input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)</label><br>
-    <label>Local:</label><br>
-    <label><input type="radio" name="local" value="superior"> Superior</label>
-    <label><input type="radio" name="local" value="inferior"> Inferior</label>
-    <label><input type="radio" name="local" value="ambos"> Ambos</label><br>
-    <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
-  </div>  <!-- Observações -->  <div class="group">
-    <label>Observações adicionais:</label>
-    <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
-  </div>  <!-- Upload de Imagem -->  <div class="group">
-    <label>Upload de imagens do caso (até 3):</label>
+  </div>  <div class="group">
+    <label data-pt="Dentes com:" data-en="Teeth with:" data-es="Dientes con:">Dentes com:</label>
+    <div>
+      <label><input type="checkbox" id="diastema"><span data-pt="Diastema" data-en="Diastema" data-es="Diastema">Diastema</span></label><br>
+      <label><input type="checkbox" id="giroversao"><span data-pt="Giroversão" data-en="Rotation" data-es="Giroversión">Giroversão</span></label><br>
+      <label><input type="checkbox" id="apinhamento"><span data-pt="Apinhamento" data-en="Crowding" data-es="Apiñamiento">Apinhamento</span></label>
+    </div>
+    <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..." data-pt="Descreva os dentes ou regiões afetadas..." data-en="Describe affected teeth or regions..." data-es="Describa los dientes o regiones afectadas..."></textarea>
+  </div>  <div class="group">
+    <label data-pt="Mordida Aberta Anterior:" data-en="Anterior Open Bite:" data-es="Mordida Abierta Anterior:">Mordida Aberta Anterior:</label>
+    <label><input type="checkbox" value="extrusao anterior"><span data-pt="Extrusão anterior" data-en="Anterior extrusion" data-es="Extrusión anterior">Extrusão anterior</span></label><br>
+    <label><input type="checkbox" value="intrusao posterior"><span data-pt="Intrusão posterior" data-en="Posterior intrusion" data-es="Intrusión posterior">Intrusão posterior</span></label><br>
+    <label><input type="checkbox" value="ambos aberta"><span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+  </div>  <div class="group">
+    <label data-pt="Mordida Cruzada:" data-en="Crossbite:" data-es="Mordida cruzada:">Mordida Cruzada:</label>
+    <label><input type="checkbox" value="expandir arco cruzado"><span data-pt="Expandir arco cruzado" data-en="Expand crossbite arch" data-es="Expandir arco cruzado">Expandir arco cruzado</span></label><br>
+    <label><input type="checkbox" value="contrair arco oposto"><span data-pt="Contrair arco oposto" data-en="Contract opposite arch" data-es="Contraer arco opuesto">Contrair arco oposto</span></label><br>
+    <label><input type="checkbox" value="ambos cruzada"><span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+  </div>  <div class="group">
+    <label data-pt="Sobremordida:" data-en="Deep Bite:" data-es="Sobremordida:">Sobremordida:</label>
+    <label data-pt="Correção:" data-en="Correction:" data-es="Corrección:">Correção:</label><br>
+    <input type="radio" name="sobrecorr" value="intruir anterior"> <span data-pt="Intruir anterior" data-en="Intrude anterior" data-es="Intruir anterior">Intruir anterior</span><br>
+    <input type="radio" name="sobrecorr" value="extruir posterior"> <span data-pt="Extruir posterior" data-en="Extrude posterior" data-es="Extruir posterior">Extruir posterior</span><br>
+    <input type="radio" name="sobrecorr" value="ambos"> <span data-pt="Ambos (detalhar abaixo)" data-en="Both (detail below)" data-es="Ambos (detallar abajo)">Ambos (detalhar abaixo)</span><br>
+    <label data-pt="Local:" data-en="Location:" data-es="Ubicación:">Local:</label><br>
+    <input type="radio" name="local" value="superior"> <span data-pt="Superior" data-en="Upper" data-es="Superior">Superior</span>
+    <input type="radio" name="local" value="inferior"> <span data-pt="Inferior" data-en="Lower" data-es="Inferior">Inferior</span>
+    <input type="radio" name="local" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span><br>
+    <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..." data-pt="Detalhe se marcou 'ambos'..." data-en="Detail if you marked 'both'..." data-es="Detalle si marcó 'ambos'..."></textarea>
+  </div>  <div class="group">
+    <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
+    <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..." data-pt="Escreva aqui informações adicionais relevantes..." data-en="Write any relevant additional information here..." data-es="Escriba información adicional relevante aquí..."></textarea>
+  </div>  <div class="group">
+    <label data-pt="Upload de imagens do caso (até 5):" data-en="Upload case images (up to 5):" data-es="Suba imágenes del caso (hasta 5):">Upload de imagens do caso (até 5):</label>
     <input type="file" id="imagem" accept="image/*" multiple>
     <div id="preview-container"></div>
   </div>
-</form>
+</div>
     <button onclick="gerarPlano()">Gerar Planejamento</button>
     <div id="resposta"></div>
   </div>
