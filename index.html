@@ -67,7 +67,72 @@
 <body>
   <div class="container">
     <h1 data-pt="Planejamento Ortodôntico" data-en="Orthodontic Planning" data-es="Planificación Ortodóncica">Planejamento Ortodôntico</h1>
-    <div id="formulario"></div>
+    <form id="formulario">
+  <!-- Idioma -->
+  <div class="group">
+    <label for="idioma">Idioma / Language / Idioma:</label>
+    <select id="idioma">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+    </select>
+  </div>  <!-- Modo -->  <div class="group">
+    <label for="modo">Modo:</label>
+    <select id="modo">
+      <option value="adulto">Modo Roberta Held – Adulto</option>
+      <option value="mista">Modo Roberta Held – Dentição Mista</option>
+    </select>
+  </div>  <!-- Tipo Facial -->  <div class="group">
+    <label for="facial">Tipo Facial:</label>
+    <select id="facial">
+      <option value="meso">Meso</option>
+      <option value="braque">Braque</option>
+      <option value="dolico">Dolico</option>
+    </select>
+  </div>  <!-- Classe Sagital -->  <div class="group">
+    <label for="classe">Classe Sagital:</label>
+    <select id="classe">
+      <option value="classe I">Classe I</option>
+      <option value="classe II">Classe II</option>
+      <option value="classe III">Classe III</option>
+      <option value="classe II cirurgica">Classe II Cirúrgica</option>
+      <option value="classe III cirurgica">Classe III Cirúrgica</option>
+    </select>
+  </div>  <!-- Dentes com -->  <div class="group">
+    <label>Dentes com:</label>
+    <label><input type="checkbox" id="diastema"> Diastema</label><br>
+    <label><input type="checkbox" id="giroversao"> Giroversão</label><br>
+    <label><input type="checkbox" id="apinhamento"> Apinhamento</label>
+    <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
+  </div>  <!-- Mordida Aberta Anterior -->  <div class="group">
+    <label>Mordida Aberta Anterior:</label>
+    <label><input type="checkbox" value="extrusao anterior"> Extrusão anterior</label><br>
+    <label><input type="checkbox" value="intrusao posterior"> Intrusão posterior</label><br>
+    <label><input type="checkbox" value="ambos aberta"> Ambos</label>
+  </div>  <!-- Mordida Cruzada -->  <div class="group">
+    <label>Mordida Cruzada:</label>
+    <label><input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado</label><br>
+    <label><input type="checkbox" value="contrair arco oposto"> Contrair arco oposto</label><br>
+    <label><input type="checkbox" value="ambos cruzada"> Ambos</label>
+  </div>  <!-- Sobremordida -->  <div class="group">
+    <label>Sobremordida:</label>
+    <label><input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior</label><br>
+    <label><input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior</label><br>
+    <label><input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)</label><br>
+    <label>Local:</label><br>
+    <label><input type="radio" name="local" value="superior"> Superior</label>
+    <label><input type="radio" name="local" value="inferior"> Inferior</label>
+    <label><input type="radio" name="local" value="ambos"> Ambos</label><br>
+    <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
+  </div>  <!-- Observações -->  <div class="group">
+    <label>Observações adicionais:</label>
+    <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
+  </div>  <!-- Upload de Imagem -->  <div class="group">
+    <label>Upload de imagens do caso (até 3):</label>
+    <input type="file" id="imagem" accept="image/*" multiple>
+    <div id="preview-container"></div>
+  </div>
+</form>
     <button onclick="gerarPlano()">Gerar Planejamento</button>
     <div id="resposta"></div>
   </div>
