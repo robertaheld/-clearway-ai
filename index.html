@@ -5,72 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClearWay – Orthodontic Planning</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      padding: 2rem;
-    }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 1rem;
-      display: block;
-    }
-    select, input, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .group {
-      margin-bottom: 1.5rem;
-    }
-    .condicional {
-      margin-left: 1rem;
-      margin-top: 0.5rem;
-    }
-    .image-preview {
-      max-width: 150px;
-      margin: 10px 10px 0 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    #resposta {
-      white-space: pre-wrap;
-      background-color: #eef;
-      padding: 1rem;
-      border-radius: 5px;
-      margin-top: 2rem;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 2rem; }
+    .container { max-width: 700px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+    h1 { text-align: center; }
+    label { font-weight: bold; margin-top: 1rem; display: block; }
+    select, input, textarea { width: 100%; padding: 0.75rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+    .group { margin-bottom: 1.5rem; }
+    .condicional { margin-left: 1rem; margin-top: 0.5rem; }
+    .image-preview { max-width: 150px; margin: 10px 10px 0 0; border-radius: 5px; border: 1px solid #ccc; }
+    #resposta { white-space: pre-wrap; background-color: #eef; padding: 1rem; border-radius: 5px; margin-top: 2rem; }
+    button { background-color: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Planejamento Ortodôntico</h1>
+    <h1 data-pt="Planejamento Ortodôntico" data-en="Orthodontic Planning" data-es="Planificación Ortodóncica">Planejamento Ortodôntico</h1>
 
     <div class="group">
-      <label for="idioma">Idioma / Language / Idioma:</label>
+      <label data-pt="Idioma:" data-en="Language:" data-es="Idioma:">Idioma:</label>
       <select id="idioma">
         <option value="pt">Português</option>
         <option value="en">English</option>
@@ -79,24 +31,24 @@
     </div>
 
     <div class="group">
-      <label>Modo de tratamento:</label>
+      <label data-pt="Modo de tratamento:" data-en="Treatment mode:" data-es="Modo de tratamiento:">Modo de tratamento:</label>
       <select id="modo">
-        <option value="adulto">Modo Roberta Held – Adulto</option>
-        <option value="mista">Modo Roberta Held – Dentição Mista</option>
+        <option value="adulto" data-pt="Modo Roberta Held – Adulto" data-en="Roberta Held Mode – Adult" data-es="Modo Roberta Held – Adulto">Modo Roberta Held – Adulto</option>
+        <option value="mista" data-pt="Modo Roberta Held – Dentição Mista" data-en="Roberta Held Mode – Mixed Dentition" data-es="Modo Roberta Held – Dentición Mixta">Modo Roberta Held – Dentição Mista</option>
       </select>
     </div>
 
     <div class="group">
-      <label>Tipo Facial:</label>
+      <label data-pt="Tipo Facial:" data-en="Facial Type:" data-es="Tipo Facial:">Tipo Facial:</label>
       <select id="facial" multiple>
-        <option value="meso">Meso</option>
-        <option value="braque">Braque</option>
-        <option value="dolico">Dólico</option>
+        <option value="meso" data-pt="Meso" data-en="Meso" data-es="Meso">Meso</option>
+        <option value="braque" data-pt="Braque" data-en="Brachy" data-es="Braquicefálico">Braque</option>
+        <option value="dolico" data-pt="Dólico" data-en="Dolichocephalic" data-es="Dolicocéfalo">Dólico</option>
       </select>
     </div>
 
     <div class="group">
-      <label>Classe Sagital:</label>
+      <label data-pt="Classe Sagital:" data-en="Sagittal Class:" data-es="Clase Sagital:">Classe Sagital:</label>
       <select id="classe" multiple>
         <option value="classe I">Classe I</option>
         <option value="classe II">Classe II</option>
@@ -107,61 +59,26 @@
     </div>
 
     <div class="group">
-      <label>Dentes com:</label>
-      <label><input type="checkbox" id="diastema"> Diastema</label><br>
-      <label><input type="checkbox" id="giroversao"> Giroversão</label><br>
-      <label><input type="checkbox" id="apinhamento"> Apinhamento</label>
-      <textarea id="detalhesDentes" rows="3" placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
+      <label data-pt="Dentes com:" data-en="Teeth with:" data-es="Dientes con:">Dentes com:</label>
+      <label><input type="checkbox" id="diastema"> <span data-pt="Diastema" data-en="Diastema" data-es="Diastema">Diastema</span></label><br>
+      <label><input type="checkbox" id="giroversao"> <span data-pt="Giroversão" data-en="Rotation" data-es="Giroversión">Giroversão</span></label><br>
+      <label><input type="checkbox" id="apinhamento"> <span data-pt="Apinhamento" data-en="Crowding" data-es="Apiñamiento">Apinhamento</span></label>
+      <textarea id="detalhesDentes" rows="3" data-pt="Descreva os dentes ou regiões afetadas..." data-en="Describe affected teeth or regions..." data-es="Describa los dientes o regiones afectadas..." placeholder="Descreva os dentes ou regiões afetadas..."></textarea>
     </div>
 
     <div class="group">
-      <label>Mordida Aberta Anterior:</label>
-      <input type="checkbox" id="aberta">
-      <div class="condicional" id="abertaOpcoes" style="display:none;">
-        <label><input type="checkbox" value="extrusao anterior"> Extrusão anterior</label><br>
-        <label><input type="checkbox" value="intrusao posterior"> Intrusão posterior</label><br>
-        <label><input type="checkbox" value="ambos aberta"> Ambos</label>
-      </div>
+      <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
+      <textarea id="observacoes" rows="4" data-pt="Escreva aqui informações adicionais relevantes..." data-en="Write relevant additional information here..." data-es="Escriba información adicional relevante aquí..." placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
     </div>
 
     <div class="group">
-      <label>Mordida Cruzada:</label>
-      <input type="checkbox" id="cruzada">
-      <div class="condicional" id="cruzadaOpcoes" style="display:none;">
-        <label><input type="checkbox" value="expandir arco cruzado"> Expandir arco cruzado</label><br>
-        <label><input type="checkbox" value="contrair arco oposto"> Contrair arco oposto</label><br>
-        <label><input type="checkbox" value="ambos cruzada"> Ambos</label>
-      </div>
-    </div>
-
-    <div class="group">
-      <label>Sobremordida:</label>
-      <input type="checkbox" id="sobremordida">
-      <div class="condicional" id="sobremordidaOpcoes" style="display:none;">
-        <label>Correção:</label><br>
-        <input type="radio" name="sobrecorr" value="intruir anterior"> Intruir anterior<br>
-        <input type="radio" name="sobrecorr" value="extruir posterior"> Extruir posterior<br>
-        <input type="radio" name="sobrecorr" value="ambos"> Ambos (detalhar abaixo)<br>
-        <label>Local:</label><br>
-        <input type="radio" name="local" value="superior"> Superior
-        <input type="radio" name="local" value="inferior"> Inferior
-        <input type="radio" name="local" value="ambos"> Ambos
-        <textarea id="sobremordidaDetalhe" rows="2" placeholder="Detalhe se marcou 'ambos'..."></textarea>
-      </div>
-    </div>
-
-    <div class="group">
-      <label>Observações adicionais:</label>
-      <textarea id="observacoes" rows="4" placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
-    </div>
-
-    <div class="group">
-      <label>Upload de imagens do caso (até 3):</label>
+      <label data-pt="Upload de imagens do caso (até 3):" data-en="Upload case images (up to 3):" data-es="Suba imágenes del caso (hasta 3):">Upload de imagens do caso (até 3):</label>
       <input type="file" id="imagem" accept="image/*" multiple>
       <div id="preview-container"></div>
     </div>
 
-    <button onclick="gerarPlano()">Gerar Planejamento</button>
+    <button onclick="gerarPlano()" data-pt="Gerar Planejamento" data-en="Generate Plan" data-es="Generar Plan">Gerar Planejamento</button>
+
     <div id="resposta"></div>
   </div>
   <script src="script.js"></script>
