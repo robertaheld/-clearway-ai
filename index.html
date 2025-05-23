@@ -67,6 +67,39 @@
     </div>
 
     <div class="group">
+      <label><input type="checkbox" id="aberta"> <span data-pt="Mordida aberta anterior" data-en="Anterior open bite" data-es="Mordida abierta anterior">Mordida aberta anterior</span></label>
+      <div id="abertaOpcoes" class="condicional" style="display:none;">
+        <label><input type="checkbox" value="intruir anterior"> <span data-pt="Intruir anterior" data-en="Intrude anterior" data-es="Intruir anterior">Intruir anterior</span></label><br>
+        <label><input type="checkbox" value="extruir posterior"> <span data-pt="Extruir posterior" data-en="Extrude posterior" data-es="Extruir posterior">Extruir posterior</span></label><br>
+        <label><input type="checkbox" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+      </div>
+    </div>
+
+    <div class="group">
+      <label><input type="checkbox" id="cruzada"> <span data-pt="Mordida cruzada" data-en="Crossbite" data-es="Mordida cruzada">Mordida cruzada</span></label>
+      <div id="cruzadaOpcoes" class="condicional" style="display:none;">
+        <label><input type="checkbox" value="expandir arco cruzado"> <span data-pt="Expandir arco cruzado" data-en="Expand crossbite arch" data-es="Expandir arco cruzado">Expandir arco cruzado</span></label><br>
+        <label><input type="checkbox" value="contrair arco oposto"> <span data-pt="Contrair arco oposto" data-en="Contract opposite arch" data-es="Contraer arco opuesto">Contrair arco oposto</span></label><br>
+        <label><input type="checkbox" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+      </div>
+    </div>
+
+    <div class="group">
+      <label><input type="checkbox" id="sobremordida"> <span data-pt="Sobremordida" data-en="Overbite" data-es="Sobremordida">Sobremordida</span></label>
+      <div id="sobremordidaOpcoes" class="condicional" style="display:none;">
+        <label data-pt="Correção:" data-en="Correction:" data-es="Corrección:">Correção:</label><br>
+        <label><input type="radio" name="sobrecorr" value="intruir anterior"> <span data-pt="Intruir anterior" data-en="Intrude anterior" data-es="Intruir anterior">Intruir anterior</span></label>
+        <label><input type="radio" name="sobrecorr" value="extruir posterior"> <span data-pt="Extruir posterior" data-en="Extrude posterior" data-es="Extruir posterior">Extruir posterior</span></label>
+        <label><input type="radio" name="sobrecorr" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+        <br><label data-pt="Localização:" data-en="Location:" data-es="Ubicación:">Localização:</label><br>
+        <label><input type="radio" name="local" value="superior"> <span data-pt="Maxila" data-en="Maxilla" data-es="Maxilar superior">Maxila</span></label>
+        <label><input type="radio" name="local" value="inferior"> <span data-pt="Mandíbula" data-en="Mandible" data-es="Mandíbula">Mandíbula</span></label>
+        <label><input type="radio" name="local" value="ambos"> <span data-pt="Ambos" data-en="Both" data-es="Ambos">Ambos</span></label>
+        <textarea id="sobremordidaDetalhe" rows="2" data-pt="Escreva detalhes da sobremordida..." data-en="Describe overbite details..." data-es="Describa detalles de sobremordida..." placeholder="Escreva detalhes da sobremordida..."></textarea>
+      </div>
+    </div>
+
+    <div class="group">
       <label data-pt="Observações adicionais:" data-en="Additional notes:" data-es="Observaciones adicionales:">Observações adicionais:</label>
       <textarea id="observacoes" rows="4" data-pt="Escreva aqui informações adicionais relevantes..." data-en="Write relevant additional information here..." data-es="Escriba información adicional relevante aquí..." placeholder="Escreva aqui informações adicionais relevantes..."></textarea>
     </div>
