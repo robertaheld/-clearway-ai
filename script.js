@@ -31,32 +31,32 @@ async function gerarPlano() {
   const classe = Array.from(document.getElementById('classe').selectedOptions).map(o => o.value).join(', ');
 
   const dentes = [];
-  if (document.getElementById('diastema').checked) dentes.push('diastema');
-  if (document.getElementById('giroversao').checked) dentes.push('giroversão');
-  if (document.getElementById('apinhamento').checked) dentes.push('apinhamento');
-  const detalhesDentes = document.getElementById('detalhesDentes').value;
+  if (document.getElementById('diastema')?.checked) dentes.push('diastema');
+  if (document.getElementById('giroversao')?.checked) dentes.push('giroversão');
+  if (document.getElementById('apinhamento')?.checked) dentes.push('apinhamento');
+  const detalhesDentes = document.getElementById('detalhesDentes')?.value || '';
 
   let aberta = '';
-  if (document.getElementById('aberta').checked) {
+  if (document.getElementById('aberta')?.checked) {
     const checks = document.querySelectorAll('#abertaOpcoes input:checked');
     aberta = Array.from(checks).map(c => c.value).join(', ');
   }
 
   let cruzada = '';
-  if (document.getElementById('cruzada').checked) {
+  if (document.getElementById('cruzada')?.checked) {
     const checks = document.querySelectorAll('#cruzadaOpcoes input:checked');
     cruzada = Array.from(checks).map(c => c.value).join(', ');
   }
 
   let sobremordida = '';
-  if (document.getElementById('sobremordida').checked) {
+  if (document.getElementById('sobremordida')?.checked) {
     const corr = document.querySelector('input[name="sobrecorr"]:checked')?.value || '';
     const local = document.querySelector('input[name="local"]:checked')?.value || '';
-    const detalhe = document.getElementById('sobremordidaDetalhe').value;
+    const detalhe = document.getElementById('sobremordidaDetalhe')?.value || '';
     sobremordida = `${corr}, localização: ${local}. ${detalhe ? 'Detalhes: ' + detalhe : ''}`;
   }
 
-  const observacoes = document.getElementById('observacoes').value;
+  const observacoes = document.getElementById('observacoes')?.value || '';
   const respostaDiv = document.getElementById('resposta');
   respostaDiv.innerText = idioma === 'en' ? 'Generating technician message...' :
                           idioma === 'es' ? 'Generando mensaje técnico...' :
@@ -111,7 +111,8 @@ if (imagemInput) {
   const checkbox = document.getElementById(id);
   if (checkbox) {
     checkbox.addEventListener('change', function () {
-      document.getElementById(id + 'Opcoes').style.display = this.checked ? 'block' : 'none';
+      const box = document.getElementById(id + 'Opcoes');
+      if (box) box.style.display = this.checked ? 'block' : 'none';
     });
   }
 });
